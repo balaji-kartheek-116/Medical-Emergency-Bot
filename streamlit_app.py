@@ -8,7 +8,6 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.prompts import PromptTemplate
 from deep_translator import GoogleTranslator
-import speech_recognition as sr 
 
 # Streamlit title
 st.title("Medical AI Chatbot Assistant")
@@ -108,37 +107,7 @@ if uploaded_file is not None:
 # Query section for chatbot interaction
 st.header("Ask a Medical Question")
 
-# Query input selection: Text or Voice input
-query_input_method = st.selectbox("Select the method of input:", ["Text Input", "Voice Input"])
-
-query = ""
-
-if query_input_method == "Text Input":
-    query = st.text_input("Enter your medical question here")
-    
-elif query_input_method == "Voice Input":
-    st.write("Click on the button and speak your query")
-    recognizer = sr.Recognizer()
-
-    if st.button("Start Recording"):
-        with sr.Microphone() as source:
-            recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
-            audio = recognizer.listen(source)  # Capture audio
-
-            try:
-                # Recognize the speech and convert it to text
-                query = recognizer.recognize_google(audio, language=language_options[selected_language])
-                st.write("Recognized text:", query)
-
-                # Translate non-English input to English
-                if selected_language != "English":
-                    query = translator.translate(query, dest="en").text
-
-            except sr.UnknownValueError:
-                st.error("Sorry, I could not understand the audio.")
-            except sr.RequestError:
-                st.error("There was an issue with the speech recognition service.")
-
+query = st.text_input("Enter your medical question here")
 if st.button("Submit"):
     if query:
         # Retrieve answer and sources
