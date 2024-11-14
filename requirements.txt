@@ -1,0 +1,17 @@
+langchain
+langchain-community
+langchain-text-splitters    
+flask
+chromadb
+pdfplumber
+tiktoken
+unstructured
+pypdf
+python-dotenv
+numpy
+pandas
+ipykernel
+pinecone
+streamlit
+deep-translator
+SpeechRecognition
