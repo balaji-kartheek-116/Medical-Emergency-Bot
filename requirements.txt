@@ -15,3 +15,4 @@ pinecone
 streamlit
 deep-translator
 SpeechRecognition
+PyAudio
